@@ -1,0 +1,51 @@
+<nav class="navbar navbar-toggleable navbar-light navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" routerLink="/">Recipe Book</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link"
+                   [routerLink]="['/recipes']"
+                   routerLinkActive="active"
+                >Recipes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   [routerLink]="['/shopping-list']"
+                    routerLinkActive="active">
+                    Shopping List</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav justify-content-end">
+            <ng-template [ngIf]="!authService.isAuthenticated()">
+                <li class="nav-item">
+                    <a routerLink="/signup" class="nav-link">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a routerLink="/signin" class="nav-link">Login</a>
+                </li>
+            </ng-template>
+            <ng-template [ngIf]="authService.isAuthenticated()">
+                <li class="nav-item dropdown" appDropdown>
+                    <a class="nav-link dropdown-toggle"
+                       role="button" style="cursor: pointer;"
+                       id="navbarDropdownMenuLink"
+                       data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">
+                        Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" style="cursor: pointer;" (click)="onSaveData()">Save Data</a>
+                        <a class="dropdown-item" style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="cursor: pointer;" (click)="onLogout()">Logout</a>
+                </li>
+            </ng-template>
+        </ul>
+    </div>
+</nav>
